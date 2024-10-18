@@ -1,26 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <MainWrapper> -->
+    <!-- <template #header> -->
+      <MainNav />
+    <!-- </template> -->
+    <!-- <template #footer> -->
+      <ContentCart/>
+    <!-- </template> -->
+  <!-- </MainWrapper> -->
+  <ContentProduct/>
+  
 </template>
-
+  
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import {inject} from 'vue'
+
+import ContentCart from "@/components/ContentCart";
+import ContentProduct from '@/components/ContentProduct'
+import MainNav from '@/components/MainNav'
+// import MainWrapper from '@/layout/MainWrapper'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    ContentCart,
+    ContentProduct,
+    MainNav,
+    // MainWrapper
+  },
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
