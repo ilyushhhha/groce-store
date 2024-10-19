@@ -12,7 +12,7 @@
 </template>
   
 <script>
-// import {inject} from 'vue'
+//  import {inject} from 'vue'
 
 import ContentCart from "@/components/ContentCart";
 import ContentProduct from '@/components/ContentProduct'

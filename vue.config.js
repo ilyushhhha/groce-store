@@ -8,7 +8,7 @@ module.exports = defineConfig({
     port: 7000,          // Порт вашего локального сервера
     https: false,        // Если ngrok работает через HTTP, не включайте HTTPS на DevServer
     client: {
-      webSocketURL: 'wss://https://78e5-78-85-49-103.ngrok-free.app/ws', // WebSocket через ngrok
+      webSocketURL: 'wss://https://e969-78-85-49-103.ngrok-free.app/ws', // WebSocket через ngrok
     },
     headers: {
       'Access-Control-Allow-Origin': '*', // Разрешить доступ со всех источников
