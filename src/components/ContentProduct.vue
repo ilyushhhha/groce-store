@@ -1,23 +1,38 @@
 <template>
-    <div class="grid grid-cols-2 gap-4 p-4">
-        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4">
-            <!-- Содержимое элемента -->
-            <h3 class="text-lg font-semibold">Название товара</h3>
-            <p class="text-gray-600">Описание товара</p>
-        </div>
-        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4">
-            <h3 class="text-lg font-semibold">Название товара</h3>
-            <p class="text-gray-600">Описание товара</p>
-        </div>
-        <!-- Добавьте больше элементов по необходимости -->
-    </div>
+  <div>
+    <ErrorComponent v-if="error" :message="error" />
+    <LoaderComponent v-else-if="loading" />
+    <ContentCard v-else :products="products" />
+  </div>
 </template>
 
 <script>
+import ContentCard from './ContentCard.vue';
+import LoaderComponent from './commons/LoaderComponent.vue';
+import ErrorComponent from './commons/ErrorComponent.vue';
+
+import { useProductService } from '@/hooks/useProductService';
+import { onMounted } from 'vue';
+
 export default {
-    name:'ContentProduct'
-}
+  name: 'ContentProduct',
+  components: {
+    ContentCard,
+    LoaderComponent,
+    ErrorComponent,
+  },
+  setup() {
+    // Используем хук для получения продуктов и состояния загрузки/ошибки
+    const { products, loading, error, fetchProducts } = useProductService();
+
+    // Используем onMounted для загрузки данных при монтировании компонента
+    onMounted(fetchProducts); // Ждем, пока данные загрузятся
+
+  
+    // console.log("products", products.value)
+    return { products, loading, error };
+  },
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped></style>
