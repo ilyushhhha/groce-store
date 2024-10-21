@@ -8,16 +8,21 @@ module.exports = defineConfig({
     port: 7000,          // Порт вашего локального сервера
     https: false,        // Если ngrok работает через HTTP, не включайте HTTPS на DevServer
     client: {
-      webSocketURL: 'wss://https://e969-78-85-49-103.ngrok-free.app/ws', // WebSocket через ngrok
+      webSocketURL: 'wss://https://5700-78-85-49-103.ngrok-free.app/ws', // WebSocket через ngrok
     },
     headers: {
-      'Access-Control-Allow-Origin': '*', // Разрешить доступ со всех источников
+      'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Headers':'*',
+      // 'Access-Control-Allow-Methods':'GET',
+      // 'Content-Type': 'application/vnd.api+json',
     },
     proxy: {
       '/api': {
-        target: 'https://laravel.demo.aimeos.org',
+        target: 'http://130.193.54.234/',
         changeOrigin: true,
-        pathRewrite: { '^/api': '/jsonapi' },
+        pathRewrite: { '^/api': '' },
+        secure: false,
+        logLevel: 'debug'
       },
     },
   },
@@ -25,7 +30,7 @@ module.exports = defineConfig({
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
-        '@/api/': path.resolve(__dirname, 'src/hooks/api')
+        // '@/api/': path.resolve(__dirname, 'src/hooks/api')
       },
     },
   },
