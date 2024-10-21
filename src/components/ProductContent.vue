@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap justify-center p-6">
+  <!-- <div class="flex flex-wrap justify-center p-6"> -->
     <!-- <ProductCard 
     v-for="product in products" 
     :key="product.id" 
@@ -9,12 +9,14 @@
 
     <MockComp v-for="product in products" :key="product.id" :product="product" :openPopup="openPopup" />
 
-    <MockPopup v-if="popupVisible" :popupVisible="popupVisible" :selectedProduct="selectedProduct"
-      :closePopup="closePopup" />
+    <MockPopup :popupVisible="popupVisible" :selectedProduct="selectedProduct"
+      :closePopup="closePopup"
+      :openPopup="openPopup" />
+
     <!-- <ProductList /> -->
     <!-- <div v-if="popupVisible" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div> -->
-  </div>
-  <div class="flex justify-center mt-4">
+  <!-- </div> -->
+  <!-- <div class="flex justify-center mt-4">
     <button class="px-4 py-2 bg-gray-300 rounded-l hover:bg-gray-400" @click="prevPage" :disabled="currentPage === 1">
       Назад
     </button>
@@ -25,7 +27,7 @@
       :disabled="currentPage === totalPages">
       Вперед
     </button>
-  </div>
+  </div> -->
 
   <!-- Отображение карточек продуктов -->
   <!-- <ContentCard v-for="product in products" @add-to-cart="handleAddToCart" /> -->
@@ -38,7 +40,7 @@ import MockPopup from './MockPopup.vue';
 // import ProductList from './ProductList.vue';
 // import ProductPopup from './ProductPopup.vue';
 
-
+import {ref} from 'vue'
 export default {
   name: 'ProductContent',
   components: {
@@ -64,12 +66,15 @@ export default {
   },
   setup() {
     
-
+    const popupVisible = ref(false)
+    return{
+      popupVisible
+    }
   },
   data() {
     return {
       // products: [], // Ваши данные
-      popupVisible: false,
+      // popupVisible: false,
       selectedProduct: '',
       currentPage: 1,
       itemsPerPage: 6
@@ -96,7 +101,10 @@ export default {
       this.popupVisible = true;
     },
     closePopup() {
-      this.popupVisible = false;
+        this.popupVisible = false
+    //   setTimeout(() => {
+    //     this.popupVisible = false; // Закрываем попап
+    //   }, 500);
     },
     nextPage() {
       if (this.currentPage < this.totalPages) {

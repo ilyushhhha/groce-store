@@ -1,9 +1,26 @@
 <template>
-  <!-- <button @click="togglePopup" class="mb-4 bg-blue-500 text-white p-2 rounded">Toggle Popup</button> -->
-  <Transition name="popup"
-   >
-    <div v-if="popupVisible" class="fixed inset-x-0 bottom-0 z-30 flex justify-center items-end">
+<!--   
+  <transition 
+  name="popup" 
+  enter-active-class="transition-all duration-300 ease-out"
+  enter-from-class="transform translate-y-full opacity-0"
+  enter-to-class="transform translate-y-0 opacity-100"
+  leave-active-class="transition-all duration-300 ease-in"
+  leave-from-class="transform translate-y-0 opacity-100"
+  leave-to-class="transform translate-y-full opacity-0"
+  > -->
+  <transition
+    name="popup"
+    enter-active-class="transition transform duration-300 ease-in-out"
+    enter-from-class="translate-y-full opacity-0"
+    enter-to-class="translate-y-0 opacity-100"
+    leave-active-class="transition transform duration-300 ease-in-out"
+    leave-from-class="translate-y-0 opacity-100"
+    leave-to-class="translate-y-full opacity-0"
+  >
 
+    <div v-if="popupVisible" class="fixed inset-x-0 bottom-0 z-50 flex justify-center items-end">
+ 
 
       <div class="bg-white h-1/2 w-full rounded-t-2xl p-10 relative shadow-2xl">
         <div class="flex justify-between items-center mb-6">
@@ -55,70 +72,30 @@
         </div>
       </div>
     </div>
-  </Transition>
+  </transition>
 </template>
 
-
 <script>
-// import {inject, ref } from 'vue';
-import {inject } from 'vue';
-
+import { inject } from 'vue';
 import QuantityButton from './commons/QuantityButton.vue';
 
 export default {
-  components:{
+  components: {
     QuantityButton
   },
+  props: {
+    popupVisible: Boolean,
+    selectedProduct: Object,
+    closePopup: Function,
+    // addToCart: Function
+    // addToCartWithAnimation: Function,
+  },
   setup() {
-    // const popupVisible = ref(false);
-
-    // Метод для переключения видимости
-
-
     const handleAddToCart = inject('addToCart')
     return {
       handleAddToCart
     }
+  }
 
-
-  },
-  props:{
-    selectedProduct: Object,
-    popupVisible: Boolean,
-    closePopup:Function
-  },
-  methods:{
-
-}
 };
 </script>
-<style>
-.popup-enter-from {
-  transform: translateY(100%);
-  opacity: 0;
-}
-
-.popup-enter-active {
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-}
-
-.popup-enter-to {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.popup-leave-from {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.popup-leave-active {
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-}
-
-.popup-leave-to {
-  transform: translateY(100%);
-  opacity: 0;
-}
-
-</style>
