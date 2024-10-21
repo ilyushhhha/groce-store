@@ -15,7 +15,7 @@
           </div>
   
           <div class="flex flex-col md:flex-row items-center mb-6">
-            <img :src="selectedProduct.images[0]" alt="Изображение продукта" class="w-40 h-40 object-cover rounded-lg mb-4 md:mb-0 md:mr-6" />
+            <img :src="selectedProduct.images[0].large_image_url" alt="Изображение продукта" class="w-40 h-40 object-cover rounded-lg mb-4 md:mb-0 md:mr-6" />
             <div>
               <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ selectedProduct.name }}</h3>
               <p class="text-gray-700 mb-4">{{ selectedProduct.supplierName }}</p>
@@ -34,7 +34,7 @@
             </div>
           </div>
   
-          <button @click="addToCartWithAnimation(selectedProduct, $event)" class="w-full bg-gray-900 text-white py-3 rounded-lg text-xl hover:bg-gray-700 focus:bg-red-500 transition duration-3000 ease-in-out">
+          <button @click="addToCart(selectedProduct, $event)" class="w-full bg-gray-900 text-white py-3 rounded-lg text-xl hover:bg-gray-700 focus:bg-red-500 transition duration-3000 ease-in-out">
             Добавить в корзину
           </button>
         </div>
@@ -48,7 +48,8 @@
       popupVisible: Boolean,
       selectedProduct: Object,
       closePopup: Function,
-      addToCartWithAnimation: Function,
+      addToCart: Function
+      // addToCartWithAnimation: Function,
     },
   };
   </script>

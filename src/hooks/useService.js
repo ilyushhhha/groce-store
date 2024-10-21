@@ -1,31 +1,39 @@
 import { ref } from 'vue';
+import { useApi } from './useApi'; // Импортируем useApi
 
-// Хук для использования сервиса
-export const useService = (fetchResources) => {
-  // Переменные состояния для данных, ошибки и загрузки
-  const data = ref([]); // Состояние, которое хранит загруженные данные
-  const error = ref(null); // Состояние для возможной ошибки при запросе
-  const loading = ref(false); // Состояние для индикации загрузки данных
+export const useService = () => {
+  const { get } = useApi(); // Получаем функцию get из useApi
+  const data = ref([]);
+  const error = ref(null);
+  const loading = ref(false);
 
-  // Функция для получения ресурса
-  const fetchResource = async (resource, params) => {
-    loading.value = true; // Устанавливаем флаг загрузки в true
+  // Функция для получения ресурсов
+  const fetchResources = async (resource, params = {}) => {
+    loading.value = true; // Устанавливаем флаг загрузки
     error.value = null; // Сбрасываем ошибку перед новым запросом
 
     try {
-      // Запрос к функции fetchResources (которая передается при вызове хука)
-      data.value = await fetchResources(resource, params); // Получаем данные и сохраняем их в state
+      data.value = await get(`/${resource}`, params); // Используем get из useApi
     } catch (err) {
-      // Если возникла ошибка, записываем её
       error.value = `Ошибка при загрузке данных: ${err.message}`;
     } finally {
-      // По завершению запроса (успешного или с ошибкой) убираем флаг загрузки
-      loading.value = false;
+      loading.value = false; // Убираем флаг загрузки
     }
   };
 
-  // Возвращаем объект с данными, ошибкой, состоянием загрузки и функцией для загрузки ресурсов
-  return { data, error, loading, fetchResource };
-};
+  // // Дополнительные функции для работы с ресурсами
+  // const fetchResourceById = async (resource, id) => {
+  //   loading.value = true;
+  //   error.value = null;
 
-export default useService;
+  //   try {
+  //     return await get(`/${resource}/${id}`); // Используем get из useApi
+  //   } catch (err) {
+  //     error.value = `Ошибка при получении ресурса: ${err.message}`;
+  //   } finally {
+  //     loading.value = false;
+  //   }
+  // };
+
+  return { data, error, loading, fetchResources };
+};

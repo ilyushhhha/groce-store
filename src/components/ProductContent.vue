@@ -3,14 +3,15 @@
     <ProductCard 
     v-for="product in products" 
     :key="product.id" 
-    :product="product" 
+    :product="product"
+    :openPopup="openPopup" 
     />
     <ProductPopup 
     v-if="popupVisible" 
     :popupVisible="popupVisible" 
     :selectedProduct="selectedProduct"
     :closePopup="closePopup" 
-    :addToCartWithAnimation="addToCartWithAnimation" 
+    :addToCart="addToCart" 
     />
     <ProductList />
     <!-- <div v-if="popupVisible" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div> -->
@@ -26,7 +27,7 @@ import ProductCard from './ProductCard.vue';
 import ProductList from './ProductList.vue';
 import ProductPopup from './ProductPopup.vue';
 
-
+import { useCart } from '@/hooks/useCart';
 
 export default {
   name: 'ProductContent',
@@ -35,9 +36,7 @@ export default {
     ProductList,
     ProductPopup,
   },
-  setup() {
 
-  },
   props: {
     products: {
       type: Array,
@@ -50,19 +49,25 @@ export default {
       type: String
     }
   },
+  setup(){
+
+    const {addToCart} = useCart();
+    return {addToCart}
+
+  },
   data(){
     return {
       // products: [], // Ваши данные
       popupVisible: false,
-      selectedProduct: null,
+      selectedProduct: '',
     };
   },
   emits: ['add-to-cart'],
   methods: {
     // Метод обработки события добавления товара в корзину
-    handleAddToCart({ rect }) {
-      this.$emit('add-to-cart', { rect });
-    },
+    // handleAddToCart({ rect }) {
+    //   this.$emit('add-to-cart', { rect });
+    // },
     openPopup(product) {
       this.selectedProduct = product;
       this.popupVisible = true;

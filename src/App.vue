@@ -1,65 +1,46 @@
 <template>
-  <div class="app-container">
-    <h1>Список ресурсов</h1>
-
-    <!-- Блок загрузки -->
-    <div v-if="loading" class="loading">
-      Загрузка данных...
-    </div>
-
-    <!-- Блок ошибок -->
-    <div v-if="error" class="error">
-      {{ error }}
-    </div>
-
-    <!-- Отображение данных -->
-    <ul v-if="data && data.length">
-      <li v-for="(item, index) in data" :key="index">
-        {{ item.name }}
-      </li>
-    </ul>
-
-    <!-- Кнопка для загрузки ресурса -->
-    <button @click="loadResource('products')">Загрузить Продукты</button>
-    <button @click="loadResource('categories')">Загрузить Категории</button>
-  </div>
+  <MainNav 
+  :openCart="openCart"
+  :itemCount="itemCount"
+  :isOpen="isOpen"
+  />
+  <ProductContent :products="data"/>
+  <ProductList
+  :isOpen="isOpen"/>
 </template>
 
 <script>
-import useCustomService from './hooks/useCustomService'; // Импортируем кастомный хук
-
+import MainNav from './components/MainNav.vue';
+import ProductContent from './components/ProductContent.vue';
+import ProductList from './components/ProductList.vue';
+import { useService } from './hooks/useService'
+import { onMounted } from 'vue';
+import { useCart } from './hooks/useCart';
 export default {
+  components:{
+    ProductContent,
+    MainNav,
+    ProductList,
+  },
   setup() {
-    const { data, error, loading, fetchResource } = useCustomService(); // Используем кастомный хук
-
-    // Функция для загрузки ресурса
-    const loadResource = (resource) => {
-      const params = {}; // Параметры запроса
-      fetchResource(resource, params); // Вызываем функцию для загрузки данных
-    };
-
+    const { data, error, loading, fetchResources } = useService(); // Используем кастомный хук
+    const { isOpen, itemCount, openCart } = useCart(); 
+    onMounted(() => {
+      fetchResources('products'); // Загрузка данных при монтировании
+    });
+    console.log('isOpen:', isOpen);
+console.log('itemCount:', itemCount);
     return {
       data,
       error,
       loading,
-      loadResource,
+      isOpen, itemCount, openCart
+      
     };
   },
 };
 </script>
 
 <style scoped>
-.app-container {
-  padding: 20px;
-}
 
-.loading {
-  color: blue;
-  font-size: 18px;
-}
-
-.error {
-  color: red;
-  font-size: 18px;
-}
 </style>

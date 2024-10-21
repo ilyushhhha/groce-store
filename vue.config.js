@@ -20,7 +20,7 @@ module.exports = defineConfig({
       '/api': {
         target: 'http://130.193.54.234/',
         changeOrigin: true,
-        pathRewrite: { '^/api': '' },
+        pathRewrite: { '^/api': '/api' },
         secure: false,
         logLevel: 'debug'
       },

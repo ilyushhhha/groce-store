@@ -1,12 +1,21 @@
 import axios from 'axios';
 
-export const apiClient = axios.create({
+const apiClient = axios.create({
   baseURL: '/api',
   headers: {
     'Content-Type': 'application/vnd.api+json',
   },
   withCredentials: true, // Позволяет отправлять куки
 });
+
+const get = async (url, params = {}) => {
+  const response = await apiClient.get(url, { params });
+  return response.data;
+};
+
+export const useApi = () => {
+  return { get };
+};
 
 // Перехватчик запроса для логирования
 apiClient.interceptors.request.use(
@@ -49,3 +58,10 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// apiClient.options = (url) => {
+//   return apiClient.request({
+//     method: 'OPTIONS',
+//     url,
+//   });
+// };
