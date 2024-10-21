@@ -3,8 +3,7 @@
     <div class="flex items-center">
       <img src="your-logo.png" alt="Logo" class="h-10 mr-auto">
     </div>
-    <button @click="openCart" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg flex items-center"
-      id="test">
+    <button @click="openCart" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg flex items-center">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
         stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-3 9H6L3 3z" />
@@ -24,14 +23,12 @@ import { inject } from 'vue';
 export default {
 
   setup() {
-    const isOpen = inject('isOpen');
+    inject('isOpen');
+    inject('itemCount');
     const openCart = inject('openCart');
-    const itemCount = inject('itemCount');
 
     return {
-      isOpen,
-      openCart,
-      itemCount,
+      openCart
     };
   },
 

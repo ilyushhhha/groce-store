@@ -21,6 +21,10 @@ export const useService = () => {
     }
   };
 
+
+  return { data, error, loading, fetchResources };
+};
+
   // // Дополнительные функции для работы с ресурсами
   // const fetchResourceById = async (resource, id) => {
   //   loading.value = true;
@@ -34,6 +38,3 @@ export const useService = () => {
   //     loading.value = false;
   //   }
   // };
-
-  return { data, error, loading, fetchResources };
-};
