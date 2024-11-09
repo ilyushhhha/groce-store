@@ -9,16 +9,8 @@
 </template>
 
 
-<script>
-import {inject} from 'vue';
+<script setup>
+import { inject } from 'vue';
 
-export default {
-    name: 'MainNavbar',
-    setup(){
-        const {openCart, cartState} = inject('cart')
-        return{
-            openCart, cartState
-        }
-    }
-};
+const { openCart, cartState } = inject('cart');
 </script>

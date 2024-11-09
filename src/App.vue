@@ -1,17 +1,17 @@
 <template>
   <!-- <MainWrapper> -->
-    <!-- <template #header> -->
-      <MainNav />
-    <!-- </template> -->
-    <!-- <template #footer> -->
-      <ContentCart/>
-    <!-- </template> -->
+  <!-- <template #header> -->
+  <MainNav />
+  <!-- </template> -->
+  <!-- <template #footer> -->
+  <ContentCart />
+  <!-- </template> -->
   <!-- </MainWrapper> -->
-  <ContentProduct/>
-  
+  <ContentProduct />
+
 </template>
-  
-<script>
+
+<script setup>
 // import {inject} from 'vue'
 
 import ContentCart from "@/components/ContentCart";
@@ -20,18 +20,6 @@ import MainNav from '@/components/MainNav'
 // import MainWrapper from '@/layout/MainWrapper'
 
 
-export default {
-  name: 'App',
-  components: {
-    ContentCart,
-    ContentProduct,
-    MainNav,
-    // MainWrapper
-  },
-
-}
 </script>
 
-<style>
-
-</style>
+<style></style>

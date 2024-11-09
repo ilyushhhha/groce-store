@@ -5,9 +5,7 @@
     </div>
   </template>
   
-  <script>
-  export default {
-    name: 'MainWrapper',
-  };
+  <script setup>
+
   </script>
   

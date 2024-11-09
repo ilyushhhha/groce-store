@@ -13,10 +13,8 @@
     </div>
 </template>
 
-<script>
-export default {
-    name:'ContentProduct'
-}
+<script setup>
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

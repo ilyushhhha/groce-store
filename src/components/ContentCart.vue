@@ -1,7 +1,6 @@
 <template>
-    <button 
-        @click="closeCart"
-        :class="['fixed right-[300px] top-4 bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg', {'hidden':isOpen}]"
+    <button @click="closeCart"
+        :class="['fixed right-[300px] top-4 bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg', { 'hidden': isOpen }]"
         id="toggle-button">X</button>
 
     <div :class="['fixed right-0 top-0 h-full w-60 bg-white rounded-l-lg shadow-lg transition-transform transform overflow-y-auto', { 'translate-x-full': isOpen, 'translate-x-0': !isOpen }]"
@@ -25,19 +24,13 @@
 </template>
 
 
-<script>
+<script setup>
 import { inject } from 'vue'
 
-export default {
-    name: 'ContentCart',
-    setup() {
-        const { closeCart, isOpen } = inject('cart')
-        return {
-            closeCart,
-            isOpen
-        }
-    }
-}
+
+const { closeCart, isOpen } = inject('cart')
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
